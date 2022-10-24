@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Mandalorian</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Koulen&family=Roboto+Condensed:wght@300;700&display=swap" rel="stylesheet">
+    <link rel='stylesheet' id='fontawesome-css'  href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css?ver=4.3.0' type='text/css' media='all' />
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            position: relative;
+            border: none;
+        }
+        html, body{
+            height: 100%;
+        }
+        body{
+            background: #162336;
+            color: #8d96a7;
+            font-family: 'Roboto Condensed', Calibri, Arial, sans-serif;
+            font-size: 0.96rem;
+            font-weight: 300;
+        }
+        .bg{
+            background: url('assets/bg.jpg') no-repeat center;
+            background-size: cover;
+            height: 100%;
+        }
+        header{
+           background: rgba(255,255,255,0.06); 
+           border-radius: 0 0 10px 10px;
+           border-bottom: rgba(255,255,255,0.08) solid 1px;
+           margin: 0 7px;
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           flex-wrap: wrap;
+           position: absolute;
+           z-index: 3;
+           width: calc(100% - 14px);
+        }
+        .logo{
+           font-family: 'Koulen', 'Roboto Condensed'; 
+           color: #fff;
+           text-decoration: none;
+           font-size: 1.1rem;
+           display: inline-block;
+           padding: 6px 15px;
+        }
+        #chk-toggle{
+            display: none;
+        }
+        #toggle{
+            display: inline-block;
+            padding: 11px;
+        }
+        #toggle span{
+            display: block;
+            width: 22px;
+            height: 3px;
+            background: #8d96a7;
+            margin: 2px;
+        }
+        nav{
+            flex-basis: 100%;
+            height: 0;            
+            overflow: hidden;
+        }
+        nav ul{
+            margin: 0 15px;
+            list-style: none;
+        }
+        nav ul li{
+            border-bottom: rgba(255,255,255,0.06) solid 1px;
+        }
+        nav ul li:nth-last-child(1){
+            border-bottom: none;
+        }
+        nav a{
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            font-size: 0.98rem;
+            padding: 8px;
+        }
+        #chk-toggle:checked ~ nav{
+            height: auto;
+        }
+        .headline{
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            margin: 0 15px;
+            flex-direction: column;
+        }
+        h1{
+            font-family: 'Koulen', 'Roboto Condensed'; 
+            color: #fff;
+            font-size: 4rem;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+            line-height: 3.3rem;
+        }
+        h1 span{
+            color: #000;
+            display: block;
+        }
+        .btn{
+            font-family: 'Koulen', 'Roboto Condensed'; 
+            text-decoration: none;
+            background: #000;
+            border: #000 solid 2px;
+            color: #fff;
+            padding: 5px 24px;
+            margin: 4px;
+            font-size: 0.9rem;
+        }
+        .clean{
+            border: #fff solid 2px;
+            background: transparent;
+        }
+        .ladoalado{
+            display: flex;
+            margin: 0 -3px;
+        }
+        .degrade{
+            /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#162336+0,162336+100&0+0,1+90 */
+            background: -moz-linear-gradient(top,  rgba(22,35,54,0) 0%, rgba(22,35,54,1) 90%, rgba(22,35,54,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top,  rgba(22,35,54,0) 0%,rgba(22,35,54,1) 90%,rgba(22,35,54,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom,  rgba(22,35,54,0) 0%,rgba(22,35,54,1) 90%,rgba(22,35,54,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00162336', endColorstr='#162336',GradientType=0 ); /* IE6-9 */
+            display: block;
+            height: 30%;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+        h2{
+            font-family: 'Roboto Condensed', Calibri, Arial;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        section{
+            margin: 0 15px 30px 15px;
+            clear: both;
+            padding-top: 30px;
+        }
+        .esq{float: left;}
+        .margdir{margin-right: 13px; margin-bottom: 8px;}
+        .w43{width: 43%;}
+
+        .videos{
+            white-space: nowrap;
+            width: calc(100% + 15px);
+            display: block;
+            overflow-y: auto;
+        }
+        .videos ul{
+            list-style: none;
+            margin-bottom: 10px;
+            font-size: 0;
+        }
+        .videos ul li{
+            display: inline-block;
+            width: 75%;
+            padding: 5px;
+        }
+        .videos ul li a{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .videos ul li img{
+            width: 100%;
+            height: auto;
+            z-index: 0;
+        }
+        .bgplay{
+            z-index: 1;
+            display: block;
+            position: absolute;
+        }
+        .play{
+            border: solid 3px #fff;
+            width: 48px;
+            height: 48px;
+            z-index: 1;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(255,255,255,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .play span{
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent  transparent #fff;
+            display: block;
+            margin-left: 2px;
+        }
+        .boxassine{
+           background: rgba(255,255,255,0.08); 
+           border-bottom: rgba(255,255,255,0.08) solid 1px;
+           border-right: rgba(255,255,255,0.08) solid 1px;
+           border-top: rgba(0,0,0,0.5) solid 1px;
+           border-left: rgba(0,0,0,0.5) solid 1px;
+           border-radius: 20px;
+           padding: 20px;
+           margin-top: 30px;
+           text-align: center;
+        }
+        .assine, .preco, .vantagens{
+            display: block;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .assine{
+            font-size: 1.2rem;
+        }
+        .preco{
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .vantagens{
+            font-size: 1rem;
+            padding: 0 10%;
+        }
+        footer{
+            background: #111a29;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 40px;
+            
+        }
+        .redes{
+            display: flex;
+            justify-content: center;
+            margin-top: 8px;
+            margin-bottom: 25px;
+        }
+        .redes a{
+            display: flex;
+            background: #fff;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            text-decoration: none;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            font-size: 1.2rem;
+            color:#162336
+        }
+        .copy{
+            color: rgba(255,255,255,0.3);
+        }
+        .disney{
+            max-width: 259px;
+            width: 90%;
+        }
+        .central{
+                height: 100%;
+            }
+        @media only screen and (min-width: 500px){
+            .videos ul li{
+                width: 65%;
+            }
+        }
+        @media only screen and (min-width: 600px){
+            .videos{
+                white-space: normal;
+                width: 100%;
+            }
+            .videos ul li{
+                width: 50%;
+            }
+            h1 {
+                font-size: 5rem;
+                line-height: 4.3rem;
+            }
+            .btn {
+                font-size: 1.18rem;
+            }
+        }
+        @media only screen and (min-width: 700px){
+            nav{
+                height: auto;
+                overflow-y: unset;
+                flex-basis: unset;
+            }
+            #toggle{
+                display: none;
+            }
+            nav ul li{
+                display: inline-block;
+                border-bottom: none;
+            }
+            nav a{
+                padding: 8px 12px;
+            }
+        }
+        @media only screen and (min-width: 850px){            
+            .spacevid{
+                width: 67%;
+                float: left;
+            }
+            .boxassine{
+                width: 32%;
+                float: right;
+            }
+            .clear{
+                clear: both;
+            }
+            h1 {
+                font-size: 7rem;
+                line-height: 6.5rem;
+            }
+            .btn {
+                font-size: 1.85rem;
+            }
+        }
+        @media only screen and (min-width: 1200px){  
+            body{
+                font-size: 1.3rem;
+            }
+            section, .central {
+                margin: 0 auto;
+                max-width: 1200px;
+            }
+            .central{
+                height: 100%;
+            }
+            header{
+                padding: 8px;
+                border-radius: 0 0 17px 17px;
+            }
+            h1 {
+                margin-bottom: 36px;
+            }
+            .w43 {
+                width: 32%;
+            }
+            .videos {
+                overflow-y: unset;
+            }
+            .videos ul li {
+                padding: 15px;
+            }
+            .videos ul {
+                margin: -15px;
+            }
+            .boxassine {
+                width: 30%;
+            }
+            .boxassine {
+                margin-top: 49px;
+                min-height: 484px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        html{
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="central">
+        <header>
+            <a href="#" class="logo">THE MANDALORIAN</a>
+
+            <input type="checkbox" id="chk-toggle" />
+            <label id="toggle" for="chk-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <nav>
+                <ul>
+                    <li><a href="#serie">A SÉRIE</a></li>
+                    <li><a href="#videos">VÍDEOS</a></li>
+                    <li><a href="#onde">ONDE ASSISTIR</a></li>
+                    <li><a href="#redes">REDES SOCIAIS</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="headline">
+            <h1><span>THE</span> MANDALORIAN</h1>
+            <div class="ladoalado">
+                <a href="#" class="btn">Assista no Disney+</a>
+                <a href="#" class="btn clean">Assista ao trailer</a>
+            </div>
+        </div>
+        </div>
+        <div class="degrade"></div>
+    </div> 
+    <section id="serie">
+        <article>   
+            <h2>A SÉRIE</h2>
+            <img src="assets/1.jpg" alt="Mandalorian" class="esq margdir w43">
+            <p>
+                Em The Mandalorian, Din Djarin (Pedro Pascal) é um guerreiro solitário que trabalha como caçador de 
+                recompensa. Ele embarca numa jornada pelos territórios esquecidos da galáxia, logo após a queda do 
+                Império e antes da criação da temida Primeira Ordem.
+                <br><br>
+                Aventura, Ficção científica<br>
+                Criado por Jon Favreau<br>
+                Elenco: Pedro Pascal, Troy Kotsur, Clancy Brown
+            </p>
+        </article>
+    </section>
+    <section id="videos" class="secvideos">
+        <article class="spacevid">   
+            <h2>VÍDEOS</h2>
+            <div class="videos">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <div class="bgplay">
+                                <span class="play">
+                                    <span></span>
+                                </span>
+                            </div>
+                            <img src="assets/2.jpg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="bgplay">
+                                <span class="play">
+                                    <span></span>
+                                </span>
+                            </div>
+                            <img src="assets/3.jpg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="bgplay">
+                                <span class="play">
+                                    <span></span>
+                                </span>
+                            </div>
+                            <img src="assets/4.jpg" alt="">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="bgplay">
+                                <span class="play">
+                                    <span></span>
+                                </span>
+                            </div>
+                            <img src="assets/5.jpg" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </article>
+
+        <aside id="onde" class="boxassine">
+            <h2>Assita Agora no</h2>
+            <img src="assets/disney.png" alt="" class="disney">
+            <span class="assine">Assine por</span>
+            <span class="preco">R$ 9,99</span>
+            <span class="vantagens">e tenha acesso a conteúdos exclusivos disney+</span>
+        </aside>
+        <div class="clear"></div>
+    </section>
+
+    <footer id="redes">
+        FOLLOW STAR WARS:
+        <div class="redes">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+        </div>
+
+        <span class="copy">TM & © Lucasfilm Ltd. All Rights Reserved</span>
+    </footer>
+</body>
+</html>
